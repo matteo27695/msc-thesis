@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import numpy as np
 from lib import common, odemodel
 
 
@@ -95,3 +96,13 @@ if __name__ == '__main__':
             break
     print(
         f"Time execution: {(datetime.now() - start_time).total_seconds()} seconds")
+
+    giorni = i + 1
+    t = np.linspace(0, giorni, giorni * 1440 + 1)
+    plt.plot(t, observation.tumor_evolution, "b", label='Tumor Evolution')
+    plt.plot(t, observation.healthy_evolution,
+             "r", label='Health Cell Evolution')
+    plt.xlabel("Time (day)")
+    plt.ylabel("% Shrinkage")
+    plt.title("DRL Adaption Radiation Therapy")
+    plt.legend()
